@@ -184,8 +184,8 @@ function init()
 	// set up the buffer loader
 	bufferLoader = new BufferLoader(context,
 	[
-		'reverb.wav',
-		'music1.mp3'
+		'assets/reverb.wav',
+		'assets/music1.mp3'
 	], finishedLoading);
 	
 	bufferLoader.load();
