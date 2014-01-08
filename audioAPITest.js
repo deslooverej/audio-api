@@ -1,9 +1,9 @@
 /**
- * jsFrontend Audio API Test
+ * Audio API Test
  *
  * @author Jeroen Desloovere <jeroen@siesqo.be>
  */
-jsFrontendAudioAPITest =
+audioAPITest =
 {
 	init: function()
 	{
@@ -11,4 +11,4 @@ jsFrontendAudioAPITest =
 	}
 }
 
-$(jsFrontendAudioAPITest.init);
+$(audioAPITest.init);

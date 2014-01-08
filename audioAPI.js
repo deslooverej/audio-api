@@ -5,7 +5,7 @@
  *
  * @author Jeroen Desloovere <jeroen@siesqo.be>
  */
-jsFrontendAudioAPI =
+audioAPI =
 {
 	bufferList: '',
 	context: '',
@@ -16,10 +16,10 @@ jsFrontendAudioAPI =
 		try
 		{
 			// init context
-			jsFrontendAudioAPI.context = new webkitAudioContext();
+			audioAPI.context = new webkitAudioContext();
 
 			// when not using webkit
-			// jsFrontendAudioAPI.context = new AudioContext();
+			// audioAPI.context = new AudioContext();
 		}
 		catch(e)
 		{
@@ -27,20 +27,20 @@ jsFrontendAudioAPI =
 			return;
 		}
 		
-		gainNode = jsFrontendAudioAPI.context.createGainNode();
-		gainNode.connect(jsFrontendAudioAPI.context.destination);
+		gainNode = audioAPI.context.createGainNode();
+		gainNode.connect(audioAPI.context.destination);
 		gainNode.gain.value = 0.5;
-		tempNode = jsFrontendAudioAPI.context.destination;
+		tempNode = audioAPI.context.destination;
 		
 		// set up the buffer loader
-		bufferLoader = jsFrontendAudioAPI.load(jsFrontendAudioAPI.context,
+		bufferLoader = audioAPI.load(audioAPI.context,
 		[
 			'music1.mp3'
-		], jsFrontendAudioAPI.finishedLoading);
+		], audioAPI.finishedLoading);
 		*/
 
 		// load audio file
-		// jsFrontendAudioAPI.loadAudioFile('music1.mp3');
+		// audioAPI.loadAudioFile('music1.mp3');
 	},
 	/*
 	loadBuffer: function(playlist)
@@ -50,10 +50,10 @@ jsFrontendAudioAPI =
 		bufferList = new Array();
 
 		// define variables
-		jsFrontendAudioAPI.bufferList = playlist;
-		jsFrontendAudioAPI.loadCount = 0;
+		audioAPI.bufferList = playlist;
+		audioAPI.loadCount = 0;
 
-		bufferLoader.load(jsFrontendAudioAPI, urlList);
+		bufferLoader.load(audioAPI, urlList);
 	},
 	
 	/**
@@ -64,23 +64,23 @@ jsFrontendAudioAPI =
 	/*
 	finishedLoading: function(bufferList)
 	{
-		jsFrontendAudioAPI.bufferList = bufferList;
+		audioAPI.bufferList = bufferList;
 		sources = new Array();
 		
-		reverbNode = jsFrontendAudioAPI.context.createConvolver();
+		reverbNode = audioAPI.context.createConvolver();
 		reverbNode.buffer = bufferList[0];
-		reverbGainNode = jsFrontendAudioAPI.context.createGainNode()
+		reverbGainNode = audioAPI.context.createGainNode()
 		reverbGFainNode.gain.value = 0.5;
 		reverbNode.connect(reverbGainNode);
-		reverbGainNode.connect(jsFrontendAudioAPI.context.destination);
+		reverbGainNode.connect(audioAPI.context.destination);
 		gainNode.connect(reverbNode);
 		tempNode = gainNode;
 		
-		for(var i = 1; i < jsFrontendAudioAPI.bufferList.length; i++)
+		for(var i = 1; i < audioAPI.bufferList.length; i++)
 		{
-			sources[i] = jsFrontendAudioAPI.context.createBufferSource();
+			sources[i] = audioAPI.context.createBufferSource();
 			
-			sources[i].buffer = jsFrontendAudioAPI.bufferList[i];
+			sources[i].buffer = audioAPI.bufferList[i];
 			
 			// create a buffer for each loaded file
 			sources[i].connect(tempNode);
@@ -111,13 +111,13 @@ jsFrontendAudioAPI =
 		request.onload = function()
 		{
 			// decode
-			jsFrontendAudioAPI.context.decodeAudioData(request.response, function(incomingBuffer)
+			audioAPI.context.decodeAudioData(request.response, function(incomingBuffer)
 			{
 				var playAudioFile = function(incomingBuffer)
 				{
-					var source = jsFrontendAudioAPI.context.createBufferSource();
+					var source = audioAPI.context.createBufferSource();
 					source.buffer = buffer;
-					source.connect(jsFrontendAudioAPI.context.destination);
+					source.connect(audioAPI.context.destination);
 					
 					// play sound immediately
 					source.start(0);
@@ -168,7 +168,7 @@ function init()
 		context = new webkitAudioContext();
 
 		// when not using webkit
-		// jsFrontendAudioAPI.context = new AudioContext();
+		// audioAPI.context = new AudioContext();
 	}
 	catch(e)
 	{
@@ -243,4 +243,4 @@ function changeVolume(aValue)
 
 window.addEventListener('load', init, false);
 
-$(jsFrontendAudioAPI.init);
+$(audioAPI.init);
